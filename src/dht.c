@@ -1,3 +1,4 @@
+#include <stdlib.h> // Import stdlib
 #include <stdio.h> // Import i/o
 #include <string.h> // Import strings
 #include "dht.h" // Import headers
@@ -5,16 +6,16 @@
 #define MAX_CLIENTS 5
 
 DHT *newDHT() {
-    DHT dht = {}; // Init DHT
+    DHT *dht = malloc(2*MAX_CLIENTS*sizeof(char[15])); // Allocate DHT
 
     FILE * file = fopen("dht.x", "wb"); // Open file
 
     if (file != NULL) { // Check is null
-        fwrite(&dht, sizeof(dht), 1, file); // Init dht
+        fwrite(dht, sizeof(dht), 1, file); // Init dht
         fclose(file); // Close file
     }
 
-    return &dht; // Return initialized DHT
+    return dht; // Return initialized DHT
 }
 
 // addNode - write node to DHT
