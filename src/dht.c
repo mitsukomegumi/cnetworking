@@ -1,19 +1,10 @@
 #include <stdio.h> // Import i/o
 #include <string.h> // Import strings
+#include "dht.h" // Import headers
 
 #define MAX_CLIENTS 5
 
-// Node - struct containing node address
-typedef struct Node {
-    char *Address; // Address - node IP address
-} Node;
-
-// DHT - list holding registered nodes
-typedef struct DHT {
-    Node *Nodes[MAX_CLIENTS]; // All registered nodes of max client size
-} DHT;
-
-void newDHT() {
+DHT *newDHT() {
     DHT dht = {}; // Init DHT
 
     FILE * file = fopen("dht.x", "wb"); // Open file
@@ -22,6 +13,8 @@ void newDHT() {
         fwrite(&dht, sizeof(dht), 1, file); // Init dht
         fclose(file); // Close file
     }
+
+    return &dht; // Return initialized DHT
 }
 
 // addNode - write node to DHT
