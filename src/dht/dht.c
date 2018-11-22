@@ -2,7 +2,7 @@
 #include <stdio.h> // Import i/o
 #include <string.h> // Import strings
 #include "dht.h" // Import headers
-#include "common/common.h" // Import common
+#include "../common/common.h" // Import common
 
 DHT *newDHT() {
     printFlush("test");
