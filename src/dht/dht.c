@@ -5,11 +5,7 @@
 #include "../common/common.h" // Import common
 
 DHT *newDHT() {
-    printFlush("test");
-
     DHT *dht = malloc(2*MAX_CLIENTS*sizeof(char[15])); // Allocate DHT
-
-    printFlush("test");
 
     FILE * file = fopen("dht.dht", "wb"); // Open file
 
@@ -23,20 +19,24 @@ DHT *newDHT() {
 
 // addNode - write node to DHT
 void addNode(char address[]) {
-    DHT dht = {}; // Init DHT buffer
+    DHT *dht = malloc(2*MAX_CLIENTS*sizeof(char[15])); // Allocate DHT
 
     FILE * file = fopen("dht.dht", "rb"); // Open file
 
     if (file != NULL) { // Check is null
-        fread(&dht, sizeof(dht), 1, file);
+        fread(dht, sizeof(dht), 1, file);
         fclose(file);
     }
 
     int x; // Init incrementor
 
     for (x = 0; x != MAX_CLIENTS; x++) { // Iterate over nodes
-        if (strlen(dht.Nodes[x]->Address) == 0 || x == MAX_CLIENTS - 1) { // Check is empty node or reached end of list
-            dht.Nodes[x]->Address = address; // Set address
+        if ((*dht).Nodes[x] == NULL || x == MAX_CLIENTS - 1) { // Check is empty node or reached end of list
+            Node *node = malloc(sizeof(char[15])); // Allocate node
+
+            (*node).Address = address; // Set address
+
+            (*dht).Nodes[x] = node; // Set node
         }
     }
 
