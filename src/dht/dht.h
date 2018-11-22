@@ -15,6 +15,8 @@ typedef struct DHT {
 
 DHT *newDHT(); // newDHT - DHT initializer
 
+void writeDHT(DHT *dht); // writeDHT - write DHT to memory
+
 void addNode(char address[]); // addNode - write node to DHT
 
 #endif
