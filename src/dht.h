@@ -1,4 +1,7 @@
-#define MAX_CLIENTS 5
+#include "common/common.h"
+
+#ifndef DHT_H
+#define DHT_H
 
 // Node - struct containing node address
 typedef struct Node {
@@ -13,3 +16,5 @@ typedef struct DHT {
 DHT *newDHT(); // newDHT - DHT initializer
 
 void addNode(char address[]); // addNode - write node to DHT
+
+#endif

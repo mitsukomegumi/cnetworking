@@ -10,8 +10,8 @@
 #include <unistd.h>
 
 #include "chat.h"
+#include "common/common.h"
 #define PORT 3000
-#define MAX_CLIENTS 5
 
 struct socket_struct {
     int socket;

@@ -2,13 +2,16 @@
 #include <stdio.h> // Import i/o
 #include <string.h> // Import strings
 #include "dht.h" // Import headers
-
-#define MAX_CLIENTS 5
+#include "common/common.h" // Import common
 
 DHT *newDHT() {
+    printFlush("test");
+
     DHT *dht = malloc(2*MAX_CLIENTS*sizeof(char[15])); // Allocate DHT
 
-    FILE * file = fopen("dht.x", "wb"); // Open file
+    printFlush("test");
+
+    FILE * file = fopen("dht.dht", "wb"); // Open file
 
     if (file != NULL) { // Check is null
         fwrite(dht, sizeof(dht), 1, file); // Init dht
@@ -22,7 +25,7 @@ DHT *newDHT() {
 void addNode(char address[]) {
     DHT dht = {}; // Init DHT buffer
 
-    FILE * file = fopen("dht.x", "rb"); // Open file
+    FILE * file = fopen("dht.dht", "rb"); // Open file
 
     if (file != NULL) { // Check is null
         fread(&dht, sizeof(dht), 1, file);
@@ -37,7 +40,7 @@ void addNode(char address[]) {
         }
     }
 
-    FILE * writeFile = fopen("dht.x", "wb"); // Open file
+    FILE * writeFile = fopen("dht.dht", "wb"); // Open file
 
     if (writeFile != NULL) { // Check is null
         fwrite(&dht, sizeof(dht), 1, writeFile); // Write dht
