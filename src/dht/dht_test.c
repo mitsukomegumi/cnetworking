@@ -1,5 +1,5 @@
 #include "dht.h"
-#include "common/common.h"
+#include "../common/common.h"
 
 int main() {
     printFlush("test"); // Log
