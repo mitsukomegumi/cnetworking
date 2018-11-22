@@ -1,4 +1,6 @@
 SRC = src/
+DHT = dht/
+COMMON = common/
 BIN = bin/
 
 CC = gcc
