@@ -17,6 +17,8 @@ DHT *newDHT(); // newDHT - DHT initializer
 
 void writeDHT(DHT *dht); // writeDHT - write DHT to memory
 
+DHT *readDHT(); // readDHT - read DHT from memory
+
 void addNode(char address[]); // addNode - write node to DHT
 
 #endif

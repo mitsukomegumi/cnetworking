@@ -26,8 +26,7 @@ void writeDHT(DHT *dht) {
 
     for (x = 0; x != MAX_CLIENTS; x++) { // Iterate over nodes
         if ((*dht).Nodes[x]) { // Check is not empty node
-            printFlush(strcat(" \n", (*dht).Nodes[x]->Address));
-            fputs(strcat("\n", (*dht).Nodes[x]->Address), fp); // Write address to file
+            fputs((*dht).Nodes[x]->Address, fp); // Write address to file
 
             break; // Break loop
         }
@@ -40,15 +39,17 @@ void writeDHT(DHT *dht) {
 DHT *readDHT() {
     DHT *dht = malloc(2*MAX_CLIENTS*sizeof(char[15])); // Allocate DHT
 
-    FILE *fp = fopen("dht.dht", "ab"); // Open/create file
+    FILE *fp = fopen("dht.dht", "r"); // Open/create file
 
-    char * line = NULL; // Init buffer
+    char *line = NULL; // Init buffer
     size_t len = 0; // Init buffer
     ssize_t read; // Init buffer
     int x = 0; // Init incrementor
 
     while ((read = getline(&line, &len, fp)) != -1) {
-        if (line) { // Check line not nil
+        if (line && strlen(line) != 0) { // Check line not nil
+            printf("%d\n", x);
+            printf("%s\n", line);
             Node *node = malloc(sizeof(char[15])); // Allocate node
 
             (*node).Address = line; // Set address
