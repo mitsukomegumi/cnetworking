@@ -45,11 +45,18 @@ DHT *readDHT() {
     size_t len = 0; // Init buffer
     ssize_t read; // Init buffer
     int x = 0; // Init incrementor
+    char *lastLine = NULL; // Init last line buffer
 
     while ((read = getline(&line, &len, fp)) != -1) {
-        if (line && strlen(line) != 0) { // Check line not nil
+        if (x > 0) { // Check not 0 index
+            lastLine = (*dht).Nodes[x-1]->Address; // Set last
+            printf("%s\n", lastLine);
+        }
+
+        if (line && strlen(line) != 0 && line != lastLine) { // Check line not nil and not repeated
             printf("%d\n", x);
             printf("%s\n", line);
+
             Node *node = malloc(sizeof(char[15])); // Allocate node
 
             (*node).Address = line; // Set address
